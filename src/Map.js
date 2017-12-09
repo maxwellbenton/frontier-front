@@ -11,9 +11,20 @@ class Map extends Component {
             key: "AIzaSyAnOUVfPIPpr32lSGuHzQLIdZf2jAfmKuU",
             language: "en"
           }}
+          options={{ mapTypeId: "satellite" }}
           center={[this.props.latitude, this.props.longitude]}
           defaultZoom={16}
-        />
+        >
+          <div
+            lat={this.props.latitude}
+            lng={this.props.longitude}
+            style={{
+              width: "100px",
+              height: "100px",
+              backgroundColor: "black"
+            }}
+          />
+        </GoogleMapReact>
       </div>
     );
   }
