@@ -12,7 +12,7 @@ class Map extends Component {
             language: "en"
           }}
           center={[this.props.latitude, this.props.longitude]}
-          defaultZoom={12}
+          defaultZoom={16}
         />
       </div>
     );
