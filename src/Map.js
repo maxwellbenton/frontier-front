@@ -1,25 +1,25 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
+import { Icon } from "semantic-ui-react";
 
 class Map extends Component {
   state = {
     positionArray: []
   };
 
-  onMapChange(center, zoom, bounds, marginBounds) {
+  onMapChange({ center, zoom, bounds, marginBounds }) {
     //store lat/long for upper left corner of map
-    let cornerLat = Math.round(bounds[0] * 1000) / 1000;
-    let cornerLong = Math.round(bounds[1] * 1000) / 1000;
+    let cornerLat = Math.round(bounds.nw.lat * 10000) / 10000;
+    let cornerLong = Math.round(bounds.nw.lng * 10000) / 10000;
 
     //calculate the lat/long difference between the upper left and lower right
     //* 1000 = 0.001 degrees between lat/long points, * 2000 = 0.0005 degrees (smaller tiles)
-    let latBoundCount = Math.abs((bounds[0] - bounds[2]) * 2000);
-    let longBoundCount = Math.abs((bounds[1] - bounds[3]) * 2000);
+    let latBoundCount = Math.abs((bounds.nw.lat - bounds.se.lat) * 2000);
+    let longBoundCount = Math.abs((bounds.nw.lng - bounds.se.lng) * 2000);
 
     //set width of tile divs, as vh/vw %
     let wWidth = Math.round(1 / longBoundCount * 100) + 0.3;
     let wHeight = Math.round(1 / latBoundCount * 100) + 0.35;
-
     let pArray = [];
     for (let i = 0; i < latBoundCount + 1; i += 1) {
       for (let n = 0; n < longBoundCount + 1; n += 1) {
@@ -35,15 +35,13 @@ class Map extends Component {
           case 5:
           case 6:
           case 7:
-            color = "black";
-            break;
           case 8:
           case 9:
-          case 10:
-            color = "yellow";
+            color = "black";
             break;
+          case 10:
           case 11:
-            color = "blue";
+            color = "yellow";
             break;
           case 12:
             color = `#${Math.floor(Math.random() * 10)}${Math.floor(
@@ -61,9 +59,9 @@ class Map extends Component {
           latitude:
             n % 2 === 0 ? cornerLat - i / 2000 : cornerLat - i / 2000 + 0.00025,
           longitude: cornerLong + n / 2000,
-          width: wWidth,
-          color: color,
-          height: wHeight,
+          wWidth,
+          color,
+          wHeight,
           opacity: 0.8
         });
       }
@@ -75,23 +73,35 @@ class Map extends Component {
     console.log(this.props);
     console.log("state", this.state);
 
-    let gridPoints = this.state.positionArray.map(position => {
+    let gridPoints = this.state.positionArray.map((position, key) => {
+      //for testing div content - remove later:
+      let name;
+      Math.random() < 0.6
+        ? (name = "")
+        : Math.random() < 0.5
+          ? (name = "empty star")
+          : Math.random() < 0.8
+            ? (name = "pagelines")
+            : (name = "angle double up");
+
       return (
         <div
+          key={key}
           lat={position.latitude}
           lng={position.longitude}
           style={{
-            width: position.width + position.width / 3 + "vw",
-            height: position.height + "vh",
+            width: position.wWidth + position.wWidth / 3 + "vw",
+            height: position.wHeight + "vh",
             clipPath:
               "polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0)",
             backgroundColor: position.color,
-
+            lineHeight: position.wHeight + "vh",
+            textAlign: "center",
             opacity: position.opacity,
             transform: "translateX(-50%) translateY(-50%)"
           }}
         >
-          [{position.latitude}, {position.longitude}]
+          <Icon name={name} size="big" />
         </div>
       );
     });
@@ -104,9 +114,9 @@ class Map extends Component {
             language: "en"
           }}
           options={{ mapTypeId: "satellite" }}
-          onBoundsChange={this.onMapChange.bind(this)}
+          onChange={this.onMapChange.bind(this)}
           center={[this.props.latitude, this.props.longitude]}
-          defaultZoom={18}
+          defaultZoom={17}
         >
           {gridPoints}
         </GoogleMapReact>
