@@ -12,11 +12,11 @@ class Map extends Component {
     let cornerLong = Math.round(bounds[1] * 1000) / 1000;
 
     //calculate the lat/long difference between the upper left and lower right
-    //if every tile is centered on a coordinate from the db, this
     //* 1000 = 0.001 degrees between lat/long points, * 2000 = 0.0005 degrees (smaller tiles)
     let latBoundCount = Math.abs((bounds[0] - bounds[2]) * 2000);
     let longBoundCount = Math.abs((bounds[1] - bounds[3]) * 2000);
 
+    //set width of tile divs, as vh/vw %
     let wWidth = Math.round(1 / longBoundCount * 100) + 0.3;
     let wHeight = Math.round(1 / latBoundCount * 100) + 0.35;
 
