@@ -25,7 +25,7 @@ class Map extends Component {
       for (let n = 0; n < longBoundCount + 1; n += 1) {
         let r = Math.floor(Math.random() * 16);
         let color;
-        let opacity = "0.9";
+        let opacity = "1";
         switch (r) {
           case 0:
           case 1:
@@ -41,13 +41,7 @@ class Map extends Component {
             break;
           case 10:
           case 11:
-            color = "yellow";
-            break;
           case 12:
-            color = `#${Math.floor(Math.random() * 10)}${Math.floor(
-              Math.random() * 10
-            )}${Math.floor(Math.random() * 10)}`;
-            break;
           case 13:
           case 14:
           case 15:
@@ -62,7 +56,7 @@ class Map extends Component {
           wWidth,
           color,
           wHeight,
-          opacity: 0.8
+          opacity: 1
         });
       }
     }
@@ -100,9 +94,7 @@ class Map extends Component {
             opacity: position.opacity,
             transform: "translateX(-50%) translateY(-50%)"
           }}
-        >
-          <Icon name={name} size="big" />
-        </div>
+        />
       );
     });
     console.log(gridPoints);

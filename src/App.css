@@ -34,26 +34,8 @@
   color: #444;
 }
 
-.hexagon {
-  position: relative;
-  width: 300px;
-  height: 173.21px;
-  background-color: #64c7cc;
-  margin: 86.6px 0;
-}
-
-.hexagon:before,
-.hexagon:after {
-  content: "";
+.tile {
   position: absolute;
-  width: 0;
-  border-left: 150px solid transparent;
-  border-right: 150px solid transparent;
-}
-
-.hexagon:before {
-  bottom: 100%;
-  border-bottom: 86.6px solid #64c7cc;
 }
 
 .hexagon:after {

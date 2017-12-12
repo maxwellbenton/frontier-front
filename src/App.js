@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import Map from "./Map";
+import TileLayer from "./TileLayer";
 import "./App.css";
 
 class App extends Component {
@@ -25,11 +26,11 @@ class App extends Component {
   render() {
     return (
       <div style={{ width: "100vw", height: "100vh", backgroundColor: "blue" }}>
-        <Map {...this.state} />
-        <div id="grid">Grid</div>
+        <TileLayer {...this.state} />
       </div>
     );
   }
 }
 
 export default App;
+// <Map {...this.state} />
