@@ -1,16 +1,17 @@
 #root {
+  background-image:url('./trouble.jpg');
+  background-position:center center;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 15px solid #5b5;
-  width: 2000px;
-  height: 1500px;
+  width: 1200px;
+  height: 750px;
 }
 
 
 #tile-map-container {
+  opacity: .85;
   position: absolute;
-  border: 15px solid #383;
   width: fit-content;
   height: fit-content;
   background-color: grey;
@@ -18,11 +19,14 @@
 
 #tile-map {
   pointer-events: none;
-  border: 15px solid #252;
 }
 
 
 .tile {
+  opacity: .85;
+  background-color: black;
   position: absolute;
   pointer-events: none;
+  clip-path: polygon(75% 0%, 99% 50%, 75% 99%, 25% 99%, 1% 50%, 25% 0%);
+  text-align: center;
 }

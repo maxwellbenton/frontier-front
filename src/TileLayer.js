@@ -7,8 +7,8 @@ class TileLayer extends Component {
     divWidth: 100,
     spacing: 75,
     divHeight: 100,
-    xTiles: 10,
-    yTiles: 8
+    xTiles: 50,
+    yTiles: 25
   };
 
   componentDidMount() {
@@ -23,8 +23,6 @@ class TileLayer extends Component {
               : rowIdx * this.state.divHeight + this.state.divHeight / 2,
 					colIdx,
 					rowIdx,
-					color: "black",
-          opacity: 1
         })
       }
     }
@@ -48,11 +46,7 @@ class TileLayer extends Component {
             tile.x,
           width: this.state.divWidth,
           height: this.state.divHeight,
-          clipPath: "polygon(75% 0%, 99% 50%, 75% 99%, 25% 99%, 1% 50%, 25% 0%)",
-          backgroundColor: tile.color,
-          lineHeight: this.state.divHeight,
-          textAlign: "center",
-          opacity: 0.9,
+          lineHeight: this.state.divHeight
         }}
       />
     ))
