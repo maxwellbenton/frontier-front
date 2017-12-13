@@ -34,10 +34,6 @@
   color: #444;
 }
 
-.tile {
-  position: absolute;
-}
-
 .hexagon:after {
   top: 100%;
   width: 0;

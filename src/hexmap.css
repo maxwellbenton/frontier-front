@@ -1,4 +1,7 @@
 #root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 15px solid #5b5;
   width: 2000px;
   height: 1500px;
@@ -6,16 +9,20 @@
 
 
 #tile-map-container {
-  border: 15px solid #383;
   position: absolute;
-  width: 2000px;
-  height: 1500px;
+  border: 15px solid #383;
+  width: fit-content;
+  height: fit-content;
   background-color: grey;
 }
 
 #tile-map {
+  pointer-events: none;
   border: 15px solid #252;
+}
+
+
+.tile {
   position: absolute;
-  width: 2000px;
-  height: 1500px;
+  pointer-events: none;
 }

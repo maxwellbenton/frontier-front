@@ -20,37 +20,38 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
-    <script type="text/javascript" src="https://cdn.rawgit.com/asvd/dragscroll/master/dragscroll.js"></script>
+
+    <!-- little buddy to disable drag disable scrolling -->
     <script type="text/javascript">
-      function preventDefault(e) {
-        e = e || window.event;
-        if (e.preventDefault)
-            e.preventDefault();
-        e.returnValue = false;
-      }
-
-      function preventDefaultForScrollKeys(e) {
-          if (keys[e.keyCode]) {
-              preventDefault(e);
-              return false;
-          }
-      }
-      // left: 37, up: 38, right: 39, down: 40,
-      // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-      const keys = {37: 1, 38: 1, 39: 1, 40: 1};
-      function disableScrolling(){
-        var x=window.scrollX;
-        var y=window.scrollY;
-        window.onscroll=function(){window.scrollTo(x, y);};
-
-        if (window.addEventListener) // older FF
-            window.addEventListener('DOMMouseScroll', preventDefault, false);
-        window.onwheel = preventDefault; // modern standard
-        window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
-        window.ontouchmove  = preventDefault; // mobile
-        document.onkeydown  = preventDefaultForScrollKeys;
-      }
-      disableScrolling();
+      // function preventDefault(e) {
+      //   e = e || window.event;
+      //   if (e.preventDefault)
+      //       e.preventDefault();
+      //   e.returnValue = false;
+      // }
+      //
+      // function preventDefaultForScrollKeys(e) {
+      //     if (keys[e.keyCode]) {
+      //         preventDefault(e);
+      //         return false;
+      //     }
+      // }
+      // // left: 37, up: 38, right: 39, down: 40,
+      // // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+      // const keys = {37: 1, 38: 1, 39: 1, 40: 1};
+      // function disableScrolling(){
+      //   var x=window.scrollX;
+      //   var y=window.scrollY;
+      //   window.onscroll=function(){window.scrollTo(x, y);};
+      //
+      //   if (window.addEventListener) // older FF
+      //       window.addEventListener('DOMMouseScroll', preventDefault, false);
+      //   window.onwheel = preventDefault; // modern standard
+      //   window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+      //   window.ontouchmove  = preventDefault; // mobile
+      //   document.onkeydown  = preventDefaultForScrollKeys;
+      // }
+      // disableScrolling();
     </script>
 
     <title>Frontier</title>
@@ -71,4 +72,37 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script type="text/javascript">
+    // scroll to center
+    var viewW = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    var viewH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    window.scrollTo((1000 - viewW/2), (750 - viewH/2))
+
+
+    var tileMap = document.getElementById('tile-map-container');
+    tileMap.addEventListener('mousedown', mouseDown, false);
+    window.addEventListener('mouseup', mouseUp, false);
+
+    let leftMouseOffset = null
+    let topMouseOffset = null
+
+    function move(e) {
+      console.log(topMouseOffset + e.clientY);
+      tileMap.style.top = (e.clientY - topMouseOffset) + 'px';
+      tileMap.style.left = (e.clientX - leftMouseOffset) + 'px';
+    }
+
+    function mouseUp() {
+      window.removeEventListener('mousemove', move, true);
+    }
+
+    function mouseDown(e) {
+      leftMouseOffset = e.clientX - tileMap.offsetLeft
+      topMouseOffset = e.clientY - tileMap.offsetTop
+      console.log("x: ", leftMouseOffset, "y: ", topMouseOffset);
+      window.addEventListener('mousemove', move, true);
+    }
+
+
+  </script>
 </html>
