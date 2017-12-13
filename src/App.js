@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import Map from "./Map";
 import TileLayer from "./TileLayer";
 import "./App.css";
+import "./hexmap.css";
 
 class App extends Component {
   state = {
@@ -25,7 +24,7 @@ class App extends Component {
 
   render() {
     return (
-      <div style={{ width: "100vw", height: "100vh", backgroundColor: "blue" }}>
+      <div id="tile-map-container" className="dragscroll">
         <TileLayer {...this.state} />
       </div>
     );

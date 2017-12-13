@@ -1,0 +1,21 @@
+#root {
+  border: 15px solid #5b5;
+  width: 2000px;
+  height: 1500px;
+}
+
+
+#tile-map-container {
+  border: 15px solid #383;
+  position: absolute;
+  width: 2000px;
+  height: 1500px;
+  background-color: grey;
+}
+
+#tile-map {
+  border: 15px solid #252;
+  position: absolute;
+  width: 2000px;
+  height: 1500px;
+}
