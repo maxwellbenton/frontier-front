@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import Map from "./Map";
 import "./App.css";
+import { connect } from 'react-redux'
+//import { testRedux } from './actions'
 
 class App extends Component {
   state = {
@@ -23,6 +24,7 @@ class App extends Component {
   }
 
   render() {
+    //this.props.testRedux()
     return (
       <div style={{ width: "100vw", height: "100vh", backgroundColor: "blue" }}>
         <Map {...this.state} />
@@ -31,4 +33,5 @@ class App extends Component {
   }
 }
 
-export default App;
+//export default connect(null, {testRedux})(App);
+export default App
