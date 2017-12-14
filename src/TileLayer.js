@@ -17,7 +17,7 @@ class TileLayer extends Component {
       for (let n = 0; n < this.state.yTiles + 1; n += 1) {
         let color = "black";
         let opacity = 1;
-        // Math.random() >= 0.9 ? (color = "black") : (opacity = 0);
+        //I believe this leverages the event pooling so all of these state additions should update together
         this.setState(pState => {
           return {
             tileArray: [

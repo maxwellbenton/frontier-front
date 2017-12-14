@@ -9,6 +9,9 @@ class Map extends Component {
 
   onMapChange({ center, zoom, bounds, marginBounds }) {
     //store lat/long for upper left corner of map
+    console.log("width", window.innerWidth);
+    console.log("height", window.innerHeight);
+    console.log("bounds", bounds);
     let cornerLat = Math.round(bounds.nw.lat * 10000) / 10000;
     let cornerLong = Math.round(bounds.nw.lng * 10000) / 10000;
 
@@ -25,7 +28,7 @@ class Map extends Component {
       for (let n = 0; n < longBoundCount + 1; n += 1) {
         let r = Math.floor(Math.random() * 16);
         let color;
-        let opacity = "1";
+        let opacity = "0.8";
         switch (r) {
           case 0:
           case 1:
@@ -91,7 +94,7 @@ class Map extends Component {
             backgroundColor: position.color,
             lineHeight: position.wHeight + "vh",
             textAlign: "center",
-            opacity: position.opacity,
+            opacity: 0.8,
             transform: "translateX(-50%) translateY(-50%)"
           }}
         />

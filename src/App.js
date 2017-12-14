@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import Map from "./Map";
 import TileLayer from "./TileLayer";
 import "./App.css";
+import data from "./data";
 
 class App extends Component {
   state = {
@@ -11,6 +12,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    console.log(data);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.setState({
@@ -26,11 +28,12 @@ class App extends Component {
   render() {
     return (
       <div style={{ width: "100vw", height: "100vh", backgroundColor: "blue" }}>
-        <TileLayer {...this.state} />
+        <Map {...this.state} />
       </div>
     );
   }
 }
 
 export default App;
-// <Map {...this.state} />
+
+// <TileLayer {...this.state} />
