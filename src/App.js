@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Map from "./Map";
 import "./App.css";
-import { connect } from 'react-redux'
-//import { testRedux } from './actions'
+import { connect } from "react-redux";
+import { getLocation } from "./actions";
 
 class App extends Component {
   state = {
@@ -11,20 +11,10 @@ class App extends Component {
   };
 
   componentDidMount() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        });
-      });
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
+    this.props.getLocation();
   }
 
   render() {
-    //this.props.testRedux()
     return (
       <div style={{ width: "100vw", height: "100vh", backgroundColor: "blue" }}>
         <Map {...this.state} />
@@ -33,5 +23,4 @@ class App extends Component {
   }
 }
 
-//export default connect(null, {testRedux})(App);
-export default App
+export default connect(null, { getLocation })(App);
