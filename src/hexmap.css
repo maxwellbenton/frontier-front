@@ -1,0 +1,32 @@
+#root {
+  background-image:url('./trouble.jpg');
+  background-position:center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1200px;
+  height: 750px;
+}
+
+
+#tile-map-container {
+  opacity: .85;
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  background-color: grey;
+}
+
+#tile-map {
+  pointer-events: none;
+}
+
+
+.tile {
+  opacity: .85;
+  background-color: black;
+  position: absolute;
+  pointer-events: none;
+  clip-path: polygon(75% 0%, 99% 50%, 75% 99%, 25% 99%, 1% 50%, 25% 0%);
+  text-align: center;
+}

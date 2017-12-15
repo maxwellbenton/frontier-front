@@ -11,6 +11,8 @@ export default function location(
         ...state,
         latitude: action.payload.latitude,
         longitude: action.payload.longitude,
+        closeLat: action.payload.cLat,
+        closeLng: action.payload.cLng
         loadingLocation: false
       };
     default:
