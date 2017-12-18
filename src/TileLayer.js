@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import makeMapDraggable from "./scripts/dragger.js"
 
 class TileLayer extends Component {
   state = {
@@ -11,9 +12,12 @@ class TileLayer extends Component {
     yTiles: 25
   };
 
-  render() {
-    console.log(this.props);
+  componentDidMount() {
+    makeMapDraggable()
+    console.log("MAP DRAGGABLE BEBEE SLOPPY JANK DOP!");
+  }
 
+  render() {
     const tileDivs = Object.keys(this.props.tileData).map((tile, index) => {
       return (
         <div
@@ -42,7 +46,6 @@ class TileLayer extends Component {
       <div
         id="tile-map"
         style={{ width: `${width}px`, height: `${height}px` }}
-        className="dragscroll"
       >
         {tileDivs}
       </div>

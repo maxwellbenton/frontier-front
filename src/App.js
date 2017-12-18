@@ -16,9 +16,9 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div id="tile-map-container">
         <Map />
-        <TileLayer />
+        <TileLayer/>
       </div>
     );
   }
