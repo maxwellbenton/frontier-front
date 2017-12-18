@@ -1,6 +1,6 @@
 #root {
-  background-image:url('./trouble.jpg');
-  background-position:center center;
+  background-image: url("./trouble.jpg");
+  background-position: center center;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,9 +8,8 @@
   height: 750px;
 }
 
-
 #tile-map-container {
-  opacity: .85;
+  opacity: 0.85;
   position: absolute;
   width: fit-content;
   height: fit-content;
@@ -21,12 +20,14 @@
   pointer-events: none;
 }
 
-
 .tile {
-  opacity: .85;
+  opacity: 0.85;
   background-color: black;
   position: absolute;
   pointer-events: none;
   clip-path: polygon(75% 0%, 99% 50%, 75% 99%, 25% 99%, 1% 50%, 25% 0%);
   text-align: center;
+  color: white;
+  overflow-wrap: break-word;
+  padding: 1.1em;
 }

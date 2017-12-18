@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
+import { connect } from "react-redux";
 
 class Map extends Component {
   onMapChange({ center, zoom, bounds, marginBounds }) {
@@ -7,6 +8,7 @@ class Map extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div style={{ width: "100%", height: "100%" }}>
         <GoogleMapReact
@@ -24,8 +26,9 @@ class Map extends Component {
   }
 }
 
+const mapStateToProps = ({ tileData, location }) => ({ tileData, location });
 
-export default connect(null, { setMapBounds })(Map);
+export default connect(mapStateToProps)(Map);
 
 // {gridPoints}
 // return (

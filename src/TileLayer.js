@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class TileLayer extends Component {
   state = {
@@ -6,46 +7,33 @@ class TileLayer extends Component {
     divWidth: 100,
     spacing: 75,
     divHeight: 100,
-    xTiles: 50,
+    xTiles: 25,
     yTiles: 25
   };
 
-  componentDidMount() {
-    const tiles = [];
-    for (let colIdx = 0; colIdx < this.state.xTiles; colIdx++) {
-      for (let rowIdx = 0; rowIdx < this.state.yTiles; rowIdx++) {
-        tiles.push({
-          x: colIdx * this.state.spacing,
-          y:
-            colIdx % 2 === 0
-              ? rowIdx * this.state.divHeight
-              : rowIdx * this.state.divHeight + this.state.divHeight / 2,
-          colIdx,
-          rowIdx
-        });
-      }
-    }
-    this.setState({
-      tileArray: tiles
-    });
-  }
-
   render() {
-    const tileDivs = this.state.tileArray.map((tile, index) => (
-      <div
-        key={index}
-        rowidx={tile.rowIdx}
-        colidx={tile.colIdx}
-        className="tile"
-        style={{
-          top: tile.y,
-          left: tile.x,
-          width: this.state.divWidth,
-          height: this.state.divHeight,
-          lineHeight: this.state.divHeight
-        }}
-      />
-    ));
+    console.log(this.props);
+
+    const tileDivs = Object.keys(this.props.tileData).map((tile, index) => {
+      return (
+        <div
+          key={index}
+          rowidx={this.props.tileData[tile].rowIdx}
+          colidx={this.props.tileData[tile].colIdx}
+          className="tile"
+          data-id={tile}
+          style={{
+            top: this.props.tileData[tile].y,
+            left: this.props.tileData[tile].x,
+            width: this.state.divWidth,
+            height: this.state.divHeight,
+            lineHeight: this.state.divHeight
+          }}
+        >
+          <h5>{tile}</h5>
+        </div>
+      );
+    });
     const width =
       this.state.divWidth * 0.75 * this.state.xTiles + this.state.divWidth / 4;
     const height =
@@ -74,4 +62,6 @@ class TileLayer extends Component {
   };
 }
 
-export default TileLayer;
+const mapStateToProps = ({ tileData, location }) => ({ ...tileData, location });
+
+export default connect(mapStateToProps)(TileLayer);

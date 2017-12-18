@@ -15,7 +15,12 @@ class App extends Component {
   }
 
   render() {
-    return <Map />;
+    return (
+      <div>
+        <Map />
+        <TileLayer />
+      </div>
+    );
   }
 }
 

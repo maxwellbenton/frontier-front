@@ -1,5 +1,11 @@
 export default function location(
-  state = { latitude: null, longitude: null, loadingLocation: false },
+  state = {
+    latitude: null,
+    longitude: null,
+    loadingLocation: false,
+    closestLat: null,
+    closestLng: null
+  },
   action
 ) {
   switch (action.type) {
@@ -11,8 +17,8 @@ export default function location(
         ...state,
         latitude: action.payload.latitude,
         longitude: action.payload.longitude,
-        closeLat: action.payload.cLat,
-        closeLng: action.payload.cLng
+        closestLat: action.payload.cLat,
+        closestLng: action.payload.cLng,
         loadingLocation: false
       };
     default:
