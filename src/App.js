@@ -1,41 +1,22 @@
 import React, { Component } from "react";
+
+import Map from "./Map";
+import "./App.css";
+import { connect } from "react-redux";
+import { getLocation } from "./actions";
 import TileLayer from "./TileLayer";
 import "./App.css";
-<<<<<<< HEAD
 import data from "./data";
-=======
 import "./hexmap.css";
->>>>>>> 69957e39004d2307fa78ffe24af09569a54a4d5d
 
 class App extends Component {
-  state = {
-    latitude: null,
-    longitude: null
-  };
-
   componentDidMount() {
-    console.log(data);
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        });
-      });
-    } else {
-      console.log("Geolocation is not supported by this browser.");
-    }
+    this.props.getLocation();
   }
 
   render() {
-    return (
-      <div id="tile-map-container" className="dragscroll">
-        <TileLayer {...this.state} />
-      </div>
-    );
+    return <Map />;
   }
 }
 
-export default App;
-
-// <TileLayer {...this.state} />
+export default connect(null, { getLocation })(App);

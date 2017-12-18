@@ -1,12 +1,57 @@
-// import React, { Component } from "react";
-// import GoogleMapReact from "google-map-react";
+import React, { Component } from "react";
+import GoogleMapReact from "google-map-react";
+
+class Map extends Component {
+  onMapChange({ center, zoom, bounds, marginBounds }) {
+    debugger;
+  }
+
+  render() {
+    return (
+      <div style={{ width: "100%", height: "100%" }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{
+            key: "AIzaSyAnOUVfPIPpr32lSGuHzQLIdZf2jAfmKuU",
+            language: "en"
+          }}
+          options={{ mapTypeId: "satellite" }}
+          onChange={this.onMapChange.bind(this)}
+          center={[this.props.latitude, this.props.longitude]}
+          defaultZoom={17}
+        />
+      </div>
+    );
+  }
+}
+
+
+export default connect(null, { setMapBounds })(Map);
+
+// {gridPoints}
+// return (
+//         <div
+//           key={key}
+//           lat={position.latitude}
+//           lng={position.longitude}
+//           style={{
+//             width: position.wWidth + position.wWidth / 3 + "vw",
+//             height: position.wHeight + "vh",
+//             clipPath:
+//               "polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0)",
+//             backgroundColor: position.color,
+//             lineHeight: position.wHeight + "vh",
+//             textAlign: "center",
+//             opacity: position.opacity,
+//             transform: "translateX(-50%) translateY(-50%)"
+//           }}
+//         />
+//       );
+//     });
+//     console.log(gridPoints);
 //
-// class Map extends Component {
-//   state = {
-//     positionArray: []
-//   };
+//   }
+// }
 //
-//   onMapChange({ center, zoom, bounds, marginBounds }) {
 //     //store lat/long for upper left corner of map
 //     let cornerLat = Math.round(bounds.nw.lat * 10000) / 10000;
 //     let cornerLong = Math.round(bounds.nw.lng * 10000) / 10000;
@@ -62,58 +107,3 @@
 //     this.setState({ positionArray: pArray });
 //   }
 //
-//   render() {
-//     console.log(this.props);
-//     console.log("state", this.state);
-//
-//     let gridPoints = this.state.positionArray.map((position, key) => {
-//       //for testing div content - remove later:
-//       let name;
-//       Math.random() < 0.6
-//         ? (name = "")
-//         : Math.random() < 0.5
-//           ? (name = "empty star")
-//           : Math.random() < 0.8
-//             ? (name = "pagelines")
-//             : (name = "angle double up");
-//
-//       return (
-//         <div
-//           key={key}
-//           lat={position.latitude}
-//           lng={position.longitude}
-//           style={{
-//             width: position.wWidth + position.wWidth / 3 + "vw",
-//             height: position.wHeight + "vh",
-//             clipPath:
-//               "polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0)",
-//             backgroundColor: position.color,
-//             lineHeight: position.wHeight + "vh",
-//             textAlign: "center",
-//             opacity: position.opacity,
-//             transform: "translateX(-50%) translateY(-50%)"
-//           }}
-//         />
-//       );
-//     });
-//     console.log(gridPoints);
-//     return (
-//       <div style={{ width: "100%", height: "100%" }}>
-//         <GoogleMapReact
-//           bootstrapURLKeys={{
-//             key: "AIzaSyAnOUVfPIPpr32lSGuHzQLIdZf2jAfmKuU",
-//             language: "en"
-//           }}
-//           options={{ mapTypeId: "satellite" }}
-//           onChange={this.onMapChange.bind(this)}
-//           center={[this.props.latitude, this.props.longitude]}
-//           defaultZoom={17}
-//         >
-//           {gridPoints}
-//         </GoogleMapReact>
-//       </div>
-//     );
-//   }
-// }
-//
-// export default Map;

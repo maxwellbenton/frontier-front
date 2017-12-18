@@ -16,6 +16,14 @@ export class AuthAdapter {
   }
 }
 
+export class LocationAdapter {
+  static localData(data) {
+    return fetch(`${baseUrl}/getLocalData`, postRequest(data)).then(
+      responseHandler()
+    );
+  }
+}
+
 export class RestfulAdapter {
   static indexFetch(route = "users") {
     return fetch(`${baseUrl}/${route}`, getRequest()).then(responseHandler());

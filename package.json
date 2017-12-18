@@ -15,10 +15,7 @@
     "saveSpec": null,
     "fetchSpec": "latest"
   },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
+  "_requiredBy": ["#USER", "/"],
   "_resolved": "https://registry.npmjs.org/dragscroll/-/dragscroll-0.0.8.tgz",
   "_shasum": "de4771e5f3a14d77b583ecef5d38bd9618f27563",
   "_spec": "dragscroll",
@@ -62,6 +59,12 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/asvd/dragscroll.git"
+  },
+  "scripts": {
+    "start": "PORT=3001 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "version": "0.0.8"
 }
