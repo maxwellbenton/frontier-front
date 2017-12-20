@@ -18,13 +18,14 @@ class TileLayer extends Component {
   }
 
   render() {
+    console.log(this.props)
     const tileDivs = []
     if(this.props.tileData) {
 
       this.props.tileData.forEach((col, colIdx) => {
-        const offset = colIdx % 2 === 0 ? 0 : this.state.tileHeight/2
+        const offset = colIdx % 2 === 0 ? 0 : this.props.tileHeight/2
         col.forEach((tile, rowIdx) => {
-          console.log(this.state.tileHeight + offset);
+          console.log(this.props.tileHeight + offset);
           tileDivs.push(
             <div
               key={`${rowIdx},${colIdx}`}
@@ -32,23 +33,23 @@ class TileLayer extends Component {
               colidx={colIdx}
               className="tile"
               style={{
-                top: rowIdx * this.state.tileHeight + offset,
-                left: colIdx * this.state.tileWidth,
-                width: this.state.tileWidth,
-                height: this.state.tileHeight,
+                top: rowIdx * this.props.tileHeight + offset,
+                left: colIdx * this.props.tileWidth,
+                width: this.props.tileWidth,
+                height: this.props.tileHeight,
               }}
             >
               <h5>{tile.data}</h5>
-              <h5>{tile.latitude}</h5>
-              <h5>{tile.longitude}</h5>
+              <div>{tile.latitude}</div>
+              <div>{tile.longitude}</div>
             </div>
           )
         })
       })
     }
     console.log(tileDivs);
-    const width = this.state.tileWidth * 0.75 * this.state.xTiles + this.state.tileWidth / 4;
-    const height = this.state.tileHeight * this.state.yTiles + this.state.tileHeight / 2;
+    const width = this.props.tileWidth * 0.75 * this.props.xTiles + this.props.tileWidth / 4;
+    const height = this.props.tileHeight * this.props.yTiles + this.props.tileHeight / 2;
     return (
       <div
         id="tile-map"

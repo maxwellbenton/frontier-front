@@ -1,5 +1,5 @@
 export default function tileData(
-  state = { tileData: [], loadingTiles: false },
+  state = { tileData: [], tileHeight: 100, tileWidth: 100, xTiles: 25, yTiles: 25, loadingTiles: false },
   action
 ) {
   switch (action.type) {
@@ -7,9 +7,14 @@ export default function tileData(
       return { ...state, loadingTiles: true };
     case "SET_LOCAL_DATA":
       console.log(action.payload);
+
       return {
         ...state,
-        tileData: action.payload,
+        tileData: action.payload.tiles,
+        tileHeight: action.payload.divHeight,
+        tileWidth: action.payload.divWidth,
+        xTiles: action.payload.xTiles,
+        yTiles: action.payload.yTiles,
         loadingTiles: false
       };
     default:

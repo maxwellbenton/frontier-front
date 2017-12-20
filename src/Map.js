@@ -1,16 +1,23 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import { connect } from "react-redux";
+import { getLocationData } from "./actions";
 
 class Map extends Component {
   onMapChange({ center, zoom, bounds, marginBounds }) {
-    debugger;
+    const latDiff = bounds.nw.lat-bounds.se.lat
+    const lngDiff = bounds.nw.lng-bounds.se.lng
+    const latDegreesPerPixel = (latDiff)/window.innerHeight
+    const lngDegreesPerPixel = (lngDiff)/window.innerWidth
+    const offScreenStart = {lat: bounds.nw.lat+latDiff, lng: bounds.nw.lng+lngDiff}
+    this.props.getLocationData({ center, zoom, latDegreesPerPixel, lngDegreesPerPixel, offScreenStart})
+
   }
 
   render() {
     console.log(this.props);
     return (
-      <div style={{ width: "400px", height: "400px", backgroundColor: "blue" }}>
+      <div style={{ width: "100vw", height: "100vh", backgroundColor: "blue" }}>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: "AIzaSyAnOUVfPIPpr32lSGuHzQLIdZf2jAfmKuU",
@@ -28,7 +35,7 @@ class Map extends Component {
 
 const mapStateToProps = ({ tileData, location }) => ({ tileData, location });
 
-export default connect(mapStateToProps)(Map);
+export default connect(mapStateToProps, { getLocationData })(Map);
 
 // {gridPoints}
 // return (
