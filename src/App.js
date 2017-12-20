@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { getLocation } from "./actions";
 import TileLayer from "./TileLayer";
 import "./App.css";
-import data from "./data";
+// import data from "./data";
 import "./hexmap.css";
 
 class App extends Component {
@@ -16,12 +16,13 @@ class App extends Component {
 
   render() {
     return (
-      <div id="tile-map-container">
-        <Map />
-        <TileLayer/>
+      <div id="tile-map-container" style={{ height: "100vh", width: "100vw" }}>
+        
+        <TileLayer />
       </div>
     );
   }
 }
 
 export default connect(null, { getLocation })(App);
+// <TileLayer />

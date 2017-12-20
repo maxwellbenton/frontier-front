@@ -10,7 +10,7 @@ class Map extends Component {
   render() {
     console.log(this.props);
     return (
-      <div style={{ width: "100%", height: "100%" }}>
+      <div style={{ width: "400px", height: "400px", backgroundColor: "blue" }}>
         <GoogleMapReact
           bootstrapURLKeys={{
             key: "AIzaSyAnOUVfPIPpr32lSGuHzQLIdZf2jAfmKuU",
@@ -18,7 +18,7 @@ class Map extends Component {
           }}
           options={{ mapTypeId: "satellite" }}
           onChange={this.onMapChange.bind(this)}
-          center={[this.props.latitude, this.props.longitude]}
+          center={[this.props.location.latitude, this.props.location.longitude]}
           defaultZoom={17}
         />
       </div>

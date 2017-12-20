@@ -5,9 +5,9 @@ import makeMapDraggable from "./scripts/dragger.js"
 class TileLayer extends Component {
   state = {
     tileArray: [],
-    divWidth: 100,
+    tileWidth: 100,
     spacing: 75,
-    divHeight: 100,
+    tileHeight: 100,
     xTiles: 25,
     yTiles: 25
   };
@@ -18,30 +18,37 @@ class TileLayer extends Component {
   }
 
   render() {
-    const tileDivs = Object.keys(this.props.tileData).map((tile, index) => {
-      return (
-        <div
-          key={index}
-          rowidx={this.props.tileData[tile].rowIdx}
-          colidx={this.props.tileData[tile].colIdx}
-          className="tile"
-          data-id={tile}
-          style={{
-            top: this.props.tileData[tile].y,
-            left: this.props.tileData[tile].x,
-            width: this.state.divWidth,
-            height: this.state.divHeight,
-            lineHeight: this.state.divHeight
-          }}
-        >
-          <h5>{tile}</h5>
-        </div>
-      );
-    });
-    const width =
-      this.state.divWidth * 0.75 * this.state.xTiles + this.state.divWidth / 4;
-    const height =
-      this.state.divHeight * this.state.yTiles + this.state.divHeight / 2;
+    const tileDivs = []
+    if(this.props.tileData) {
+
+      this.props.tileData.forEach((col, colIdx) => {
+        const offset = colIdx % 2 === 0 ? 0 : this.state.tileHeight/2
+        col.forEach((tile, rowIdx) => {
+          console.log(this.state.tileHeight + offset);
+          tileDivs.push(
+            <div
+              key={`${rowIdx},${colIdx}`}
+              rowidx={rowIdx}
+              colidx={colIdx}
+              className="tile"
+              style={{
+                top: rowIdx * this.state.tileHeight + offset,
+                left: colIdx * this.state.tileWidth,
+                width: this.state.tileWidth,
+                height: this.state.tileHeight,
+              }}
+            >
+              <h5>{tile.data}</h5>
+              <h5>{tile.latitude}</h5>
+              <h5>{tile.longitude}</h5>
+            </div>
+          )
+        })
+      })
+    }
+    console.log(tileDivs);
+    const width = this.state.tileWidth * 0.75 * this.state.xTiles + this.state.tileWidth / 4;
+    const height = this.state.tileHeight * this.state.yTiles + this.state.tileHeight / 2;
     return (
       <div
         id="tile-map"

@@ -1,5 +1,5 @@
 export default function tileData(
-  state = { tileData: {}, loadingTiles: false },
+  state = { tileData: [], loadingTiles: false },
   action
 ) {
   switch (action.type) {
