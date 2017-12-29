@@ -14,7 +14,7 @@ class App extends Component {
 
   render() {
     return (
-      <div id="tile-map-container" style={{ height: "100vh", width: "100vw" }}>
+      <div id="tile-map-container">
         <Map />
         <TileLayer />
       </div>
