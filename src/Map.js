@@ -43,7 +43,6 @@ class Map extends Component {
     return {
       disableDefaultUI: true,
       mapTypeId: "satellite",
-      gestureHandling: "none",
       zoomControl: false
     };
   }

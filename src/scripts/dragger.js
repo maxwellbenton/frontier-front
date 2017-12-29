@@ -1,5 +1,5 @@
 function makeMapDraggable() {
-  const tileMap = document.getElementById("tile-map-container");
+  const tileMap = document.getElementById("tile-map");
   const startX = tileMap.offsetLeft;
   const startY = tileMap.offsetTop;
   tileMap.addEventListener("mousedown", mouseDown, false);
@@ -35,4 +35,4 @@ function makeMapDraggable() {
   }
 }
 
-export default makeMapDraggable
+export default makeMapDraggable;
