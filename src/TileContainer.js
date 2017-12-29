@@ -16,7 +16,7 @@ const TileContainer = ({
       style={{
         top: tileData.yPos,
         left: tileData.xPos,
-        width: tileWidth,
+        width: tileWidth * 1.4,
         height: tileHeight
       }}
     >

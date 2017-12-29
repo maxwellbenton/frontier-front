@@ -11,7 +11,7 @@ class Map extends Component {
     let latHexOffset = (offsetLng * 2000) % 2 === 0 ? 0 : 0.00025;
 
     const offsetLat = Math.round(bounds.nw.lat * 1000) / 1000 + latHexOffset;
-
+    console.log(offsetLng, offsetLat);
     const latDegreesPerPixel = latDiff / window.innerHeight;
     const lngDegreesPerPixel = lngDiff / window.innerWidth;
     const yOffset = 0; //Math.floor((offsetLat - bounds.nw.lat) / latDegreesPerPixel);
