@@ -14,7 +14,7 @@ class TileLayer extends Component {
   };
 
   componentDidMount() {
-    makeMapDraggable();
+    makeMapDraggable(this.props.tileWidth, this.props.tileHeight);
   }
 
   generateTiles = () =>
