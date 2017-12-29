@@ -1,8 +1,9 @@
 function makeMapDraggable() {
   const tileMap = document.getElementById("tile-map");
+  console.log(tileMap);
   const startX = tileMap.offsetLeft;
   const startY = tileMap.offsetTop;
-  tileMap.addEventListener("mousedown", mouseDown, false);
+  window.addEventListener("mousedown", mouseDown, false);
   window.addEventListener("mouseup", mouseUp, false);
   let xMouseOffset = null;
   let yMouseOffset = null;
@@ -17,6 +18,7 @@ function makeMapDraggable() {
   }
 
   function mouseUp(e) {
+    console.log('mu');
     const xMoved = e.clientX - xMouseDown + lastXShift;
     const yMoved = e.clientY - yMouseDown + lastYShift;
     const xJaunt = (lastXShift = xMoved % 150); // because they are hexagons
@@ -27,6 +29,7 @@ function makeMapDraggable() {
   }
 
   function mouseDown(e) {
+    console.log('md');
     xMouseDown = e.clientX;
     yMouseDown = e.clientY;
     xMouseOffset = e.clientX - tileMap.offsetLeft;

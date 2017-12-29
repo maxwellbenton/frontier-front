@@ -1,9 +1,7 @@
 #root {
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
-  /* width: 1200px;
-  height: 750px; */
+  justify-content: center; */
 }
 
 #tile-map-container {
@@ -17,6 +15,11 @@
 
 #tile-map {
   pointer-events: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
 }
 
 .map {
