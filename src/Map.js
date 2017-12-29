@@ -22,16 +22,40 @@ class Map extends Component {
     });
   }
 
+  createMapOptions(maps) {
+    // next props are exposed at maps
+    // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
+    // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
+    // "DirectionsStatus", "DirectionsTravelMode", "DirectionsUnitSystem", "DistanceMatrixStatus",
+    // "DistanceMatrixElementStatus", "ElevationStatus", "GeocoderLocationType", "GeocoderStatus", "KmlLayerStatus",
+    // "MaxZoomStatus", "StreetViewStatus", "TransitMode", "TransitRoutePreference", "TravelMode", "UnitSystem"
+    return {
+      disableDefaultUI: true,
+      mapTypeId: "satellite",
+      gestureHandling: "none",
+      zoomControl: false
+    };
+  }
+
   render() {
     console.log(this.props);
     return (
-      <div style={{ width: "100vw", height: "100vh", backgroundColor: "blue" }}>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          backgroundColor: "blue"
+        }}
+      >
         <GoogleMapReact
           bootstrapURLKeys={{
             key: "AIzaSyAnOUVfPIPpr32lSGuHzQLIdZf2jAfmKuU",
             language: "en"
           }}
-          options={{ mapTypeId: "satellite" }}
+          options={this.createMapOptions}
           onChange={this.onMapChange.bind(this)}
           center={[
             this.props.location.closestLat,

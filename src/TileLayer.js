@@ -36,7 +36,7 @@ class TileLayer extends Component {
                 left: colIdx * this.props.tileWidth,
                 width: this.props.tileWidth,
                 height: this.props.tileHeight,
-                opacity: 0.2
+                opacity: 0.7
               }}
             >
               <div>{tile.data}</div>
