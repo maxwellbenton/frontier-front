@@ -51,16 +51,7 @@ class Map extends Component {
   render() {
     console.log(this.props);
     return (
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          backgroundColor: "blue"
-        }}
-      >
+      <div className="map">
         <GoogleMapReact
           bootstrapURLKeys={{
             key: "AIzaSyAnOUVfPIPpr32lSGuHzQLIdZf2jAfmKuU",

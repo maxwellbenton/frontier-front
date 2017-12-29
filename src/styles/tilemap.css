@@ -9,21 +9,26 @@
 #tile-map-container {
   /* opacity: 0.85; */
   position: absolute;
-  width: fit-content;
-  height: fit-content;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
 }
 
 #tile-map {
   pointer-events: none;
 }
 
-<<<<<<< HEAD
+.map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: blue;
+}
+
 .tile-container {
-=======
-.tile {
-  opacity: 0.2;
-  background-color: black;
->>>>>>> 2ad7e5f0095977dc709ccec752e24490f5c32f15
   position: absolute;
   display: flex;
   align-items: center;
@@ -46,12 +51,6 @@
 }
 
 .tile-border {
-<<<<<<< HEAD
-=======
-  content: "";
-  display: block;
-  pointer-events: none;
->>>>>>> 2ad7e5f0095977dc709ccec752e24490f5c32f15
   top: 0px;
   left: 0px;
   position: absolute;
