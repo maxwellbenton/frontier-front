@@ -5,20 +5,29 @@ import { getLocationData } from "./actions";
 
 class Map extends Component {
   onMapChange({ center, zoom, bounds, marginBounds }) {
+    const offsetLng =
+      Math.round((bounds.nw.lng + bounds.nw.lng - center.lng) * 1000) / 1000;
+    let latHexOffset = (offsetLng * 2000) % 2 === 0 ? 0 : 0.00025;
+
+    const offsetLat =
+      Math.round((bounds.nw.lat + bounds.nw.lat - center.lat) * 2000) / 2000 +
+      latHexOffset;
     const latDiff = bounds.nw.lat - bounds.se.lat;
     const lngDiff = bounds.nw.lng - bounds.se.lng;
     const latDegreesPerPixel = latDiff / window.innerHeight;
     const lngDegreesPerPixel = lngDiff / window.innerWidth;
-    const offScreenStart = {
-      lat: bounds.nw.lat + latDiff,
-      lng: bounds.nw.lng + lngDiff
-    };
+    const yOffset = Math.floor((offsetLat - center.lat) / latDegreesPerPixel);
+    const xOffset = Math.floor((offsetLng - center.lng) / lngDegreesPerPixel);
+
     this.props.getLocationData({
-      center,
       zoom,
       latDegreesPerPixel,
       lngDegreesPerPixel,
-      offScreenStart
+      offsetLat,
+      offsetLng,
+      yOffset,
+      xOffset,
+      center
     });
   }
 

@@ -4,13 +4,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1200px;
-  height: 750px;
+  /* width: 1200px;
+  height: 750px; */
 }
 
 #tile-map-container {
-  opacity: 0.85;
-  position: absolute;
+  /* opacity: 0.85; */
+  /* position: absolute; */
   width: fit-content;
   height: fit-content;
 }

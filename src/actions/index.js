@@ -1,7 +1,5 @@
 // import { LocationAdapter } from "../adapter";
 
-
-
 export function getLocation() {
   return dispatch => {
     dispatch(gettingLocation());
@@ -27,36 +25,51 @@ export function getLocation() {
 }
 
 export function getLocationData(mapData) {
-
   return dispatch => {
     dispatch(gettingLocation());
-    let closestLong = Math.round(mapData.offScreenStart.lng * 2000) / 2000;
-    let latHexOffset = (closestLong * 2000) % 2 === 0 ? 0 : 0.00025;
-    let closestLat = Math.round(mapData.offScreenStart.lat * 2000) / 2000 + latHexOffset;
-    let spacing = 75;
-    let divHeight = Math.ceil(0.0005/Math.abs(mapData.latDegreesPerPixel))
-    let divWidth = Math.ceil(0.0005/Math.abs(mapData.lngDegreesPerPixel))
-    let xTiles = Math.ceil(window.innerWidth*2/divWidth);
-    let yTiles = Math.ceil(window.innerHeight*2/divHeight);
-    let tiles = []
+
+    // let closestLong = Math.round(mapData.offScreenStart.lng * 2000) / 2000;
+    // let latHexOffset = (closestLong * 2000) % 2 === 0 ? 0 : 0.00025;
+    // let closestLat =
+    //   Math.round(mapData.offScreenStart.lat * 2000) / 2000 + latHexOffset;
+    // let spacing = 75;
+    let divHeight = Math.ceil(0.0005 / Math.abs(mapData.latDegreesPerPixel));
+    let divWidth = Math.ceil(0.0005 / Math.abs(mapData.lngDegreesPerPixel));
+    let xTiles = Math.ceil(window.innerWidth * 3 / divWidth);
+    let yTiles = Math.ceil(window.innerHeight * 3 / divHeight);
+    let tiles = [];
+
     for (let colIdx = 0; colIdx < xTiles; colIdx++) {
-      tiles[colIdx] = []
-      const offset = colIdx % 2 === 0 ? 0 : 0.00025
+      tiles[colIdx] = [];
+      const offset = colIdx % 2 === 0 ? 0 : 0.00025;
+      const yOff = colIdx % 2 === 0 ? 0 : divHeight / 2;
       for (let rowIdx = 0; rowIdx < yTiles; rowIdx++) {
-        const longitude = (closestLong + (colIdx * 0.0005)).toFixed(4);
-        const latitude = (closestLat + (rowIdx * 0.0005)+offset).toFixed(5)
+        const longitude = (mapData.offsetLng + colIdx * 0.0005).toFixed(4);
+        const latitude = (mapData.offsetLat + rowIdx * 0.0005 + offset).toFixed(
+          5
+        );
+
         tiles[colIdx].push({
           longitude,
           latitude,
-          data: `[${rowIdx}, ${colIdx}]`
-        })
+          data: `[${rowIdx}, ${colIdx}]`,
+          xPos: -mapData.xOffset + colIdx * divWidth,
+          yPos: -mapData.yOffset + rowIdx * divHeight + yOff
+        });
       }
     }
-    dispatch(setLocalData({tiles, divWidth, divHeight, xTiles, yTiles}));
-
-
-
-  }
+    dispatch(
+      setLocalData({
+        tiles,
+        divWidth,
+        divHeight,
+        xTiles,
+        yTiles,
+        latPerPix: mapData.latDegreesPerPixel,
+        lngPerPix: mapData.lngDegreesPerPixel
+      })
+    );
+  };
   //   if (navigator.geolocation) {
   //     navigator.geolocation.getCurrentPosition(position => {
   //       let closestLong = Math.round(position.coords.longitude * 2000) / 2000;

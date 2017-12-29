@@ -1,5 +1,14 @@
 export default function tileData(
-  state = { tileData: [], tileHeight: 100, tileWidth: 100, xTiles: 25, yTiles: 25, loadingTiles: false },
+  state = {
+    tileData: [],
+    tileHeight: 100,
+    tileWidth: 100,
+    xTiles: 25,
+    yTiles: 25,
+    latPerPix: 0.0005,
+    lngPerPix: 0.0005,
+    loadingTiles: false
+  },
   action
 ) {
   switch (action.type) {
@@ -15,6 +24,8 @@ export default function tileData(
         tileWidth: action.payload.divWidth,
         xTiles: action.payload.xTiles,
         yTiles: action.payload.yTiles,
+        latPerPix: action.payload.latPerPix,
+        lngPerPix: action.payload.lngPerPix,
         loadingTiles: false
       };
     default:

@@ -19,12 +19,13 @@ class TileLayer extends Component {
 
   render() {
     console.log(this.props);
+
     const tileDivs = [];
     if (this.props.tileData) {
       this.props.tileData.forEach((col, colIdx) => {
         const offset = colIdx % 2 === 0 ? 0 : this.props.tileHeight / 2;
         col.forEach((tile, rowIdx) => {
-          console.log(this.props.tileHeight + offset);
+          // console.log(this.props.tileHeight + offset);
           tileDivs.push(
             <div
               key={`${rowIdx},${colIdx}`}
@@ -32,11 +33,12 @@ class TileLayer extends Component {
               colidx={colIdx}
               className="tile"
               style={{
-                top: rowIdx * this.props.tileHeight + offset,
-                left: colIdx * this.props.tileWidth,
+                position: "absolute",
+                top: tile.yPos,
+                left: tile.xPos,
                 width: this.props.tileWidth,
                 height: this.props.tileHeight,
-                opacity: 0.7
+                opacity: 0.3
               }}
             >
               <div>{tile.data}</div>
@@ -47,7 +49,7 @@ class TileLayer extends Component {
         });
       });
     }
-    console.log(tileDivs);
+
     const width =
       this.props.tileWidth * 0.75 * this.props.xTiles +
       this.props.tileWidth / 4;
