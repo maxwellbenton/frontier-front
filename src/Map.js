@@ -7,25 +7,31 @@ class Map extends Component {
   onMapChange({ center, zoom, bounds, marginBounds }) {
     const latDiff = bounds.nw.lat - bounds.se.lat;
     const lngDiff = bounds.nw.lng - bounds.se.lng;
+    const latPixelsPerDegree = window.innerHeight / latDiff;
+    const lngPixelsPerDegree = window.innerWidth / lngDiff;
+
     const offsetLng = Math.round(bounds.nw.lng * 1000) / 1000;
     let latHexOffset = (offsetLng * 2000) % 2 === 0 ? 0 : 0.00025;
-
     const offsetLat = Math.round(bounds.nw.lat * 1000) / 1000 + latHexOffset;
-    console.log(offsetLng, offsetLat);
-    const latDegreesPerPixel = latDiff / window.innerHeight;
-    const lngDegreesPerPixel = lngDiff / window.innerWidth;
-    const yOffset = 0; //Math.floor((offsetLat - bounds.nw.lat) / latDegreesPerPixel);
-    const xOffset = 0; //Math.floor((offsetLng - bounds.nw.lng) / lngDegreesPerPixel);
+
+    const xOffset = (bounds.nw.lng - offsetLng) * lngPixelsPerDegree;
+    const yOffset = (bounds.nw.lat - offsetLat) * latPixelsPerDegree;
+
+    console.log("bounds", bounds.nw.lat, bounds.nw.lng);
+    console.log("center", center.lat, center.lng);
+    console.log("offSetLatLong", offsetLat, offsetLng);
+    console.log("offsetYX", yOffset, xOffset);
 
     this.props.getLocationData({
       zoom,
-      latDegreesPerPixel,
-      lngDegreesPerPixel,
+      latPixelsPerDegree,
+      lngPixelsPerDegree,
       offsetLat,
       offsetLng,
       yOffset,
       xOffset,
-      center
+      center,
+      bounds
     });
   }
 
@@ -39,7 +45,12 @@ class Map extends Component {
     return {
       disableDefaultUI: true,
       mapTypeId: "satellite",
-      zoomControl: false
+      zoomControl: false,
+      scrollwheel: false,
+      navigationControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      panControl: false
     };
   }
 
@@ -55,14 +66,7 @@ class Map extends Component {
           onChange={this.onMapChange.bind(this)}
           center={[this.props.location.latitude, this.props.location.longitude]}
           defaultZoom={17}
-        >
-          <div
-            lat={this.props.location.latitude}
-            lng={this.props.location.longitude}
-          >
-            hey
-          </div>
-        </GoogleMapReact>
+        />
       </div>
     );
   }

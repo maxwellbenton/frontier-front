@@ -6,11 +6,17 @@ import { setReadyState } from "./actions";
 
 class TileLayer extends Component {
   componentDidMount() {
-    makeMapDraggable(this.props.tileWidth, this.props.tileHeight);
+    makeMapDraggable(
+      this.props.tileWidth,
+      this.props.tileHeight,
+      this.props.xOffset,
+      this.props.yOffset
+    );
     this.props.setReadyState();
     setTimeout(() => {
-      document.getElementById("loading-screen").classList.add("fade-out")
-    }, 1000)
+      document.getElementById("loading-screen").classList.add("fade-out");
+      document.getElementById("loading-screen").style.pointerEvents = "none";
+    }, 1000);
   }
 
   generateTiles = () =>
@@ -36,7 +42,15 @@ class TileLayer extends Component {
     const height =
       this.props.tileHeight * this.props.yTiles + this.props.tileHeight / 2;
     return (
-      <div id="tile-map" style={{ width: `${width}px`, height: `${height}px` }}>
+      <div
+        id="tile-map"
+        style={{
+          width: `${width}px`,
+          height: `${height}px`,
+          top: this.props.yOffset,
+          left: this.props.xOffset
+        }}
+      >
         {this.props.tileData ? this.generateTiles() : null}
       </div>
     );

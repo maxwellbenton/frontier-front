@@ -32,8 +32,9 @@ export function setReadyState() {
 
 export function getLocationData(mapData) {
   return dispatch => {
-    let divHeight = Math.ceil(0.0005 / Math.abs(mapData.latDegreesPerPixel));
-    let divWidth = Math.ceil(0.0005 / Math.abs(mapData.lngDegreesPerPixel));
+    let divHeight = Math.ceil(0.0005 * Math.abs(mapData.latPixelsPerDegree));
+    let divWidth = Math.ceil(0.0005 * Math.abs(mapData.lngPixelsPerDegree));
+
     let xTiles = Math.ceil(window.innerWidth / divWidth);
     let yTiles = Math.ceil(window.innerHeight / divHeight);
     let tiles = [];
@@ -52,8 +53,8 @@ export function getLocationData(mapData) {
           longitude,
           latitude,
           data: `[${rowIdx}, ${colIdx}]`,
-          xPos: -mapData.xOffset + colIdx * divWidth,
-          yPos: -mapData.yOffset + rowIdx * divHeight + yOff
+          xPos: colIdx * divWidth,
+          yPos: rowIdx * divHeight + yOff
         });
       }
     }
@@ -64,6 +65,8 @@ export function getLocationData(mapData) {
         divHeight,
         xTiles,
         yTiles,
+        xOffset: mapData.xOffset,
+        yOffset: mapData.yOffset,
         latPerPix: mapData.latDegreesPerPixel,
         lngPerPix: mapData.lngDegreesPerPixel
       })

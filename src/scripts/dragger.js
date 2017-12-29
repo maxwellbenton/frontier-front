@@ -1,4 +1,4 @@
-function makeMapDraggable(tileWidth, tileHeight) {
+function makeMapDraggable(tileWidth, tileHeight, xOffset, yOffset) {
   const tileMap = document.getElementById("tile-map");
   const startX = tileMap.offsetLeft;
   const startY = tileMap.offsetTop;
