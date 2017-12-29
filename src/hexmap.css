@@ -13,7 +13,6 @@
   position: absolute;
   width: fit-content;
   height: fit-content;
-  background-color: grey;
 }
 
 #tile-map {
@@ -21,7 +20,7 @@
 }
 
 .tile {
-  opacity: 0.85;
+  opacity: 0.2;
   background-color: black;
   position: absolute;
   pointer-events: none;

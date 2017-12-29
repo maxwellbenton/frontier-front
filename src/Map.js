@@ -5,13 +5,21 @@ import { getLocationData } from "./actions";
 
 class Map extends Component {
   onMapChange({ center, zoom, bounds, marginBounds }) {
-    const latDiff = bounds.nw.lat-bounds.se.lat
-    const lngDiff = bounds.nw.lng-bounds.se.lng
-    const latDegreesPerPixel = (latDiff)/window.innerHeight
-    const lngDegreesPerPixel = (lngDiff)/window.innerWidth
-    const offScreenStart = {lat: bounds.nw.lat+latDiff, lng: bounds.nw.lng+lngDiff}
-    this.props.getLocationData({ center, zoom, latDegreesPerPixel, lngDegreesPerPixel, offScreenStart})
-
+    const latDiff = bounds.nw.lat - bounds.se.lat;
+    const lngDiff = bounds.nw.lng - bounds.se.lng;
+    const latDegreesPerPixel = latDiff / window.innerHeight;
+    const lngDegreesPerPixel = lngDiff / window.innerWidth;
+    const offScreenStart = {
+      lat: bounds.nw.lat + latDiff,
+      lng: bounds.nw.lng + lngDiff
+    };
+    this.props.getLocationData({
+      center,
+      zoom,
+      latDegreesPerPixel,
+      lngDegreesPerPixel,
+      offScreenStart
+    });
   }
 
   render() {
@@ -25,7 +33,10 @@ class Map extends Component {
           }}
           options={{ mapTypeId: "satellite" }}
           onChange={this.onMapChange.bind(this)}
-          center={[this.props.location.latitude, this.props.location.longitude]}
+          center={[
+            this.props.location.closestLat,
+            this.props.location.closestLng
+          ]}
           defaultZoom={17}
         />
       </div>
