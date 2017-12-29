@@ -17,13 +17,7 @@
   pointer-events: none;
 }
 
-<<<<<<< HEAD
 .tile-container {
-=======
-.tile {
-  opacity: 0.2;
-  background-color: black;
->>>>>>> 2ad7e5f0095977dc709ccec752e24490f5c32f15
   position: absolute;
   display: flex;
   align-items: center;
@@ -46,12 +40,6 @@
 }
 
 .tile-border {
-<<<<<<< HEAD
-=======
-  content: "";
-  display: block;
-  pointer-events: none;
->>>>>>> 2ad7e5f0095977dc709ccec752e24490f5c32f15
   top: 0px;
   left: 0px;
   position: absolute;
