@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import makeMapDraggable from "./scripts/dragger.js";
 import TileContainer from "./TileContainer.js";
+import { setReadyState } from "./actions";
 
 class TileLayer extends Component {
   componentDidMount() {
     makeMapDraggable(this.props.tileWidth, this.props.tileHeight);
+    this.props.setReadyState();
   }
 
   generateTiles = () =>
@@ -52,4 +54,4 @@ class TileLayer extends Component {
 
 const mapStateToProps = ({ tileData, location }) => ({ ...tileData, location });
 
-export default connect(mapStateToProps)(TileLayer);
+export default connect(mapStateToProps, { setReadyState })(TileLayer);

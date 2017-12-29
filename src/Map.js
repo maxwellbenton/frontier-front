@@ -55,7 +55,14 @@ class Map extends Component {
           onChange={this.onMapChange.bind(this)}
           center={[this.props.location.latitude, this.props.location.longitude]}
           defaultZoom={17}
-        />
+        >
+          <div
+            lat={this.props.location.latitude}
+            lng={this.props.location.longitude}
+          >
+            hey
+          </div>
+        </GoogleMapReact>
       </div>
     );
   }

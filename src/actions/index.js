@@ -24,10 +24,14 @@ export function getLocation() {
   };
 }
 
+export function setReadyState() {
+  return {
+    type: "SET_TILES_LOADED"
+  };
+}
+
 export function getLocationData(mapData) {
   return dispatch => {
-    dispatch(gettingLocation());
-
     let divHeight = Math.ceil(0.0005 / Math.abs(mapData.latDegreesPerPixel));
     let divWidth = Math.ceil(0.0005 / Math.abs(mapData.lngDegreesPerPixel));
     let xTiles = Math.ceil(window.innerWidth / divWidth);
@@ -97,4 +101,3 @@ export function setLocalData(tileData) {
     payload: tileData
   };
 }
-
