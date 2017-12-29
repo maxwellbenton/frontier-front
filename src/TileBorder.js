@@ -1,7 +1,6 @@
 import React from "react"
 
 const TileBorder = ({width, height, color}) => {
-
   const divStyle = {
     backgroundColor: color,
     width: width,

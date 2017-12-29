@@ -8,7 +8,7 @@
 
 #tile-map-container {
   /* opacity: 0.85; */
-  /* position: absolute; */
+  position: absolute;
   width: fit-content;
   height: fit-content;
 }
@@ -17,27 +17,35 @@
   pointer-events: none;
 }
 
-.tile {
-  opacity: 0.5;
-  background-color: black;
+.tile-container {
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
-  clip-path: polygon(75% 0%, 99% 50%, 75% 99%, 25% 99%, 1% 50%, 25% 0%);
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%, 25% 0%);
   text-align: center;
-  font-size: 7pt;
-  color: white;
   overflow-wrap: break-word;
+  opacity: 0.5;
+}
+
+.tile-data {
+  position: absolute;
+  height: inherit;
+  width: inherit;
+  color: white;
+  font-size: 6pt;
+  background-color: grey;
+  clip-path: polygon(70% 5%, 92.5% 50%, 70% 95%, 30% 95%, 7.5% 50%, 30% 5%);
 }
 
 .tile-border {
-  content: '';
-  display: block;
   top: 0px;
   left: 0px;
   position: absolute;
   height: inherit;
   width: inherit;
   pointer-events: none;
-  clip-path: polygon(75% 0%, 99% 50%, 75% 99%, 25% 99%, 1% 50%, 25% 0%);
   opacity: 1;
+  pointer-events: none;
 }

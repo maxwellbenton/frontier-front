@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import makeMapDraggable from "./scripts/dragger.js";
-import Tile from "./Tile.js";
+import TileContainer from "./TileContainer.js";
 
 class TileLayer extends Component {
   state = {
@@ -26,9 +26,9 @@ class TileLayer extends Component {
           tileHeight: this.props.tileHeight,
           tileWidth: this.props.tileWidth,
           offset: colIdx % 2 === 0 ? 0 : this.props.tileHeight / 2,
-          ...tileData // latitude, longitude, data
+          tileData: tileData // {latitude, longitude, data}
         };
-        acc.push(<Tile key={`${rowIdx}-${colIdx}`} {...tileProps} />);
+        acc.push(<TileContainer key={`${rowIdx}-${colIdx}`} {...tileProps} />);
       });
       return acc;
     }, []);
