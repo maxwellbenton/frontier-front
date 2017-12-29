@@ -14,12 +14,8 @@ class Map extends Component {
 
     const latDegreesPerPixel = latDiff / window.innerHeight;
     const lngDegreesPerPixel = lngDiff / window.innerWidth;
-    const yOffset = Math.floor(
-      (offsetLat - bounds.nw.lat) / latDegreesPerPixel
-    );
-    const xOffset = Math.floor(
-      (offsetLng - bounds.nw.lng) / lngDegreesPerPixel
-    );
+    const yOffset = 0; //Math.floor((offsetLat - bounds.nw.lat) / latDegreesPerPixel);
+    const xOffset = 0; //Math.floor((offsetLng - bounds.nw.lng) / lngDegreesPerPixel);
 
     this.props.getLocationData({
       zoom,

@@ -4,15 +4,6 @@ import makeMapDraggable from "./scripts/dragger.js";
 import TileContainer from "./TileContainer.js";
 
 class TileLayer extends Component {
-  state = {
-    tileArray: [],
-    tileWidth: 100,
-    spacing: 75,
-    tileHeight: 100,
-    xTiles: 25,
-    yTiles: 25
-  };
-
   componentDidMount() {
     makeMapDraggable(this.props.tileWidth, this.props.tileHeight);
   }

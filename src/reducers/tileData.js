@@ -1,8 +1,8 @@
 export default function tileData(
   state = {
     tileData: [],
-    tileHeight: 100,
-    tileWidth: 100,
+    tileHeight: null,
+    tileWidth: null,
     xTiles: 25,
     yTiles: 25,
     latPerPix: 0.0005,
@@ -15,8 +15,6 @@ export default function tileData(
     case "GETTING_LOCAL_DATA":
       return { ...state, loadingTiles: true };
     case "SET_LOCAL_DATA":
-      console.log(action.payload);
-
       return {
         ...state,
         tileData: action.payload.tiles,
