@@ -17,6 +17,7 @@ class App extends Component {
       <div id="tile-map-container">
         <Map />
         {this.props.tileHeight !== null ? <TileLayer /> : null}
+        <div id="loading-screen" />
       </div>
     );
   }
