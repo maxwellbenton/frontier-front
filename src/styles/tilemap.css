@@ -18,7 +18,7 @@
 }
 
 .tile {
-  opacity: 0.5;
+  opacity: 0.2;
   background-color: black;
   position: absolute;
   pointer-events: none;
@@ -30,8 +30,9 @@
 }
 
 .tile-border {
-  content: '';
+  content: "";
   display: block;
+  pointer-events: none;
   top: 0px;
   left: 0px;
   position: absolute;
