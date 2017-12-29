@@ -29,11 +29,6 @@ function makeMapDraggable() {
   }
 
   function mouseDown(e) {
-<<<<<<< HEAD
-    console.log(e);
-=======
-    console.log('md');
->>>>>>> a90d44ffcee32857af71f59790723f8deeba1fd1
     xMouseDown = e.clientX;
     yMouseDown = e.clientY;
     xMouseOffset = e.clientX - tileMap.offsetLeft;
