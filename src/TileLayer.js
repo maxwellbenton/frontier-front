@@ -8,6 +8,9 @@ class TileLayer extends Component {
   componentDidMount() {
     makeMapDraggable(this.props.tileWidth, this.props.tileHeight);
     this.props.setReadyState();
+    setTimeout(() => {
+      document.getElementById("loading-screen").classList.add("fade-out")
+    }, 1000)
   }
 
   generateTiles = () =>
