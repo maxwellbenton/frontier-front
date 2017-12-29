@@ -16,10 +16,12 @@ class App extends Component {
     return (
       <div id="tile-map-container">
         <Map />
-        <TileLayer />
+        {this.props.tileHeight !== null ? <TileLayer /> : null}
       </div>
     );
   }
 }
 
-export default connect(null, { getLocation })(App);
+const mapStateToProps = ({ tileData, location }) => ({ ...tileData, location });
+
+export default connect(mapStateToProps, { getLocation })(App);
