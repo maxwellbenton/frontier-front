@@ -35,8 +35,8 @@ export function getLocationData(mapData) {
     // let spacing = 75;
     let divHeight = Math.ceil(0.0005 / Math.abs(mapData.latDegreesPerPixel));
     let divWidth = Math.ceil(0.0005 / Math.abs(mapData.lngDegreesPerPixel));
-    let xTiles = Math.ceil(window.innerWidth * 3 / divWidth);
-    let yTiles = Math.ceil(window.innerHeight * 3 / divHeight);
+    let xTiles = Math.ceil(window.innerWidth / divWidth);
+    let yTiles = Math.ceil(window.innerHeight / divHeight);
     let tiles = [];
 
     for (let colIdx = 0; colIdx < xTiles; colIdx++) {
@@ -45,7 +45,7 @@ export function getLocationData(mapData) {
       const yOff = colIdx % 2 === 0 ? 0 : divHeight / 2;
       for (let rowIdx = 0; rowIdx < yTiles; rowIdx++) {
         const longitude = (mapData.offsetLng + colIdx * 0.0005).toFixed(4);
-        const latitude = (mapData.offsetLat + rowIdx * 0.0005 + offset).toFixed(
+        const latitude = (mapData.offsetLat - rowIdx * 0.0005 - offset).toFixed(
           5
         );
 

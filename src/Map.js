@@ -5,19 +5,21 @@ import { getLocationData } from "./actions";
 
 class Map extends Component {
   onMapChange({ center, zoom, bounds, marginBounds }) {
-    const offsetLng =
-      Math.round((bounds.nw.lng + bounds.nw.lng - center.lng) * 1000) / 1000;
-    let latHexOffset = (offsetLng * 2000) % 2 === 0 ? 0 : 0.00025;
-
-    const offsetLat =
-      Math.round((bounds.nw.lat + bounds.nw.lat - center.lat) * 2000) / 2000 +
-      latHexOffset;
     const latDiff = bounds.nw.lat - bounds.se.lat;
     const lngDiff = bounds.nw.lng - bounds.se.lng;
+    const offsetLng = Math.round(bounds.nw.lng * 1000) / 1000;
+    let latHexOffset = (offsetLng * 2000) % 2 === 0 ? 0 : 0.00025;
+
+    const offsetLat = Math.round(bounds.nw.lat * 1000) / 1000 + latHexOffset;
+
     const latDegreesPerPixel = latDiff / window.innerHeight;
     const lngDegreesPerPixel = lngDiff / window.innerWidth;
-    const yOffset = Math.floor((offsetLat - center.lat) / latDegreesPerPixel);
-    const xOffset = Math.floor((offsetLng - center.lng) / lngDegreesPerPixel);
+    const yOffset = Math.floor(
+      (offsetLat - bounds.nw.lat) / latDegreesPerPixel
+    );
+    const xOffset = Math.floor(
+      (offsetLng - bounds.nw.lng) / lngDegreesPerPixel
+    );
 
     this.props.getLocationData({
       zoom,
@@ -66,10 +68,7 @@ class Map extends Component {
           }}
           options={this.createMapOptions}
           onChange={this.onMapChange.bind(this)}
-          center={[
-            this.props.location.closestLat,
-            this.props.location.closestLng
-          ]}
+          center={[this.props.location.latitude, this.props.location.longitude]}
           defaultZoom={17}
         />
       </div>
