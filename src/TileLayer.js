@@ -44,8 +44,8 @@ class TileLayer extends Component {
         style={{
           width: `${width}px`,
           height: `${height}px`,
-          top: this.props.yOffset,
-          left: this.props.xOffset
+          top: this.props.yOffset - this.props.tileHeight / 2,
+          left: this.props.xOffset - this.props.tileWidth * 0.75
         }}
       >
         {this.props.tileData ? this.generateTiles() : null}

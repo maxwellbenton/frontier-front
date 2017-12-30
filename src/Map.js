@@ -19,7 +19,7 @@ class Map extends Component {
       navigationControl: false,
       mapTypeControl: false,
       scaleControl: false,
-      minZoom: 16
+      minZoom: 17
     };
   }
 
