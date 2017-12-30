@@ -1,73 +1,20 @@
 {
-  "_from": "dragscroll",
-  "_id": "dragscroll@0.0.8",
-  "_inBundle": false,
-  "_integrity": "sha1-3kdx5fOhTXe1g+zvXTi9lhjydWM=",
-  "_location": "/dragscroll",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "tag",
-    "registry": true,
-    "raw": "dragscroll",
-    "name": "dragscroll",
-    "escapedName": "dragscroll",
-    "rawSpec": "",
-    "saveSpec": null,
-    "fetchSpec": "latest"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/dragscroll/-/dragscroll-0.0.8.tgz",
-  "_shasum": "de4771e5f3a14d77b583ecef5d38bd9618f27563",
-  "_spec": "dragscroll",
-  "_where": "/Users/daniel/Development/siberia/frontier-front",
-  "author": {
-    "name": "Dmitry Prokashev",
-    "email": "heliosframework@gmail.com"
-  },
-  "browser": {
-    "fs": false,
-    "child_process": false
-  },
-  "bugs": {
-    "url": "https://github.com/asvd/dragscroll/issues"
-  },
-  "bundleDependencies": false,
-  "dependencies": {},
-  "deprecated": false,
-  "description": "Tiny library for drag-n-drop scrolling style",
-  "devDependencies": {},
-  "engines": {
-    "node": "*"
-  },
-  "homepage": "https://github.com/asvd/dragscroll#readme",
-  "keywords": [
-    "dragscroll",
-    "scroll",
-    "scrolling",
-    "mouse",
-    "hold",
-    "drag-n-drop",
-    "drag-and-drop",
-    "click-n-hold",
-    "click-and-hold",
-    "drag",
-    "viewport"
-  ],
-  "main": "dragscroll.js",
-  "name": "dragscroll",
-  "optionalDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/asvd/dragscroll.git"
+  "name": "Frontier",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "google-map-react": "^0.25.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-scripts": "1.0.17",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "version": "0.0.8"
+  }
 }
