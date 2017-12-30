@@ -10,6 +10,8 @@ const TileContainer = ({
   offset,
   tileData
 }) => {
+  let bColor = tileData.playerTile ? "#faa" : "#000";
+  let tileOpacity = tileData.playerTile ? 0 : 1;
   return (
     <div
       className="tile-container"
@@ -17,10 +19,11 @@ const TileContainer = ({
         top: tileData.yPos,
         left: tileData.xPos,
         width: tileWidth * 1.4,
-        height: tileHeight
+        height: tileHeight * 1.05,
+        opacity: tileOpacity
       }}
     >
-      <TileBorder color={Math.round(Math.random()) ? "#faa" : "#373"} />
+      <TileBorder color={bColor} />
       <TileData {...tileData} />
     </div>
   );

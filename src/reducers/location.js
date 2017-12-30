@@ -2,9 +2,7 @@ export default function location(
   state = {
     latitude: null,
     longitude: null,
-    loadingLocation: false,
-    closestLat: null,
-    closestLng: null
+    loadingLocation: false
   },
   action
 ) {
@@ -17,8 +15,6 @@ export default function location(
         ...state,
         latitude: action.payload.latitude,
         longitude: action.payload.longitude,
-        closestLat: action.payload.cLat,
-        closestLng: action.payload.cLng,
         loadingLocation: false
       };
     default:

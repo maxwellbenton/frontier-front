@@ -33,6 +33,7 @@ class TileLayer extends Component {
 
   render() {
     console.log("tiles rendering!");
+
     // const width =
     //   this.props.tileWidth * 0.75 * this.props.xTiles +
     //   this.props.tileWidth / 4;
@@ -47,10 +48,6 @@ class TileLayer extends Component {
         }}
       >
         {this.props.tileData ? this.generateTiles() : null}
-        <div className="upperTileEdge" />
-        <div className="lowerTileEdge" />
-        <div className="leftTileEdge" />
-        <div className="rightTileEdge" />
       </div>
     );
   }

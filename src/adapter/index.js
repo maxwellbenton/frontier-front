@@ -78,7 +78,7 @@ function responseHandler(response) {
     if (response.ok) {
       return response.json();
     } else {
-      throw response.json();
+      return { errors: true };
     }
   };
 }

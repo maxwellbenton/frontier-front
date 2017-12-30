@@ -1,4 +1,4 @@
-// import { LocationAdapter } from "../adapter";
+import { RestfulAdapter } from "../adapter";
 
 export function getLocation() {
   //runs at App.js componentDidMount to get current location.  Map will render once lat/long are set
@@ -56,45 +56,71 @@ export function getLocationData({ center, zoom, bounds, marginBounds }) {
   const xTiles = Math.ceil(window.innerWidth * 1.5 / tileWidth);
   const yTiles = Math.ceil(window.innerHeight * 1.5 / tileHeight);
 
+  //being used for json-server
+
   return dispatch => {
     let tiles = [];
-    for (let colIdx = 0; colIdx < xTiles; colIdx++) {
-      tiles[colIdx] = [];
 
-      //offsets added in both lat degrees and y pixels for every other column of tiles
-      const offset = colIdx % 2 === 0 ? 0 : 0.00025;
-      const yOff = colIdx % 2 === 0 ? 0 : tileHeight / 2;
+    const closestLng = (Math.round(center.lng * 1000) / 1000).toFixed(4);
+    let cLatHexOffset = (closestLng * 2000) % 2 === 0 ? 0 : 0.00025;
+    const closestLat = (
+      Math.round(center.lat * 1000) / 1000 +
+      cLatHexOffset
+    ).toFixed(5);
 
-      for (let rowIdx = 0; rowIdx < yTiles; rowIdx++) {
-        //for display only.  Actual position on screen is calculated based on pixels converted from pixel/degree ratio
-        const longitude = (offsetLng + colIdx * 0.0005).toFixed(4);
-        const latitude = (offsetLat - rowIdx * 0.0005 - offset).toFixed(5);
+    let postCoords = RestfulAdapter.createFetch("tiles", {
+      coords: `${closestLat},${closestLng}`
+    });
 
-        //xPos & yPos used as left and top styling. all other data is visual
-        tiles[colIdx].push({
-          longitude,
-          latitude,
-          data: `[${rowIdx}, ${colIdx}]`,
-          xPos: colIdx * tileWidth,
-          yPos: rowIdx * tileHeight + yOff
-        });
-      }
-    }
-
-    //once tileHeight is set here, TileLayer will render tile overlay
-    dispatch(
-      setLocalData({
-        tiles,
-        tileWidth,
-        tileHeight,
-        xTiles,
-        yTiles,
-        xOffset,
-        yOffset,
-        latPixelsPerDegree,
-        lngPixelsPerDegree
-      })
+    let serverData = postCoords.then(() =>
+      RestfulAdapter.indexFetch("tiles").then(tiles => tiles)
     );
+
+    serverData.then(tileData => {
+      console.log(tileData);
+      for (let colIdx = 0; colIdx < xTiles; colIdx++) {
+        tiles[colIdx] = [];
+
+        //offsets added in both lat degrees and y pixels for every other column of tiles
+        const offset = colIdx % 2 === 0 ? 0 : 0.00025;
+        const yOff = colIdx % 2 === 0 ? 0 : tileHeight / 2;
+
+        for (let rowIdx = 0; rowIdx < yTiles; rowIdx++) {
+          //for display only.  Actual position on screen is calculated based on pixels converted from pixel/degree ratio
+          const longitude = (offsetLng + colIdx * 0.0005).toFixed(4);
+          const latitude = (offsetLat - rowIdx * 0.0005 - offset).toFixed(5);
+
+          let playerTile;
+          tileData.find(tile => tile.coords === `${latitude},${longitude}`)
+            ? (playerTile = true)
+            : (playerTile = false);
+
+          //xPos & yPos used as left and top styling. all other data is visual
+          tiles[colIdx].push({
+            coords: `${longitude},${latitude}`,
+            longitude,
+            latitude,
+            playerTile,
+            data: `[${rowIdx}, ${colIdx}]`,
+            xPos: colIdx * tileWidth,
+            yPos: rowIdx * tileHeight + yOff
+          });
+        }
+      }
+      dispatch(
+        setLocalData({
+          tiles,
+          tileWidth,
+          tileHeight,
+          xTiles,
+          yTiles,
+          xOffset,
+          yOffset,
+          latPixelsPerDegree,
+          lngPixelsPerDegree
+        })
+      );
+    });
   };
 }
 
