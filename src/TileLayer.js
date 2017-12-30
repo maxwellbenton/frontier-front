@@ -6,12 +6,7 @@ import { setReadyState } from "./actions";
 
 class TileLayer extends Component {
   componentDidMount() {
-    makeMapDraggable(
-      this.props.tileWidth,
-      this.props.tileHeight,
-      this.props.xOffset,
-      this.props.yOffset
-    );
+    makeMapDraggable(this.props.tileWidth, this.props.tileHeight);
     this.props.setReadyState();
     setTimeout(() => {
       document.getElementById("loading-screen").classList.add("fade-out");
@@ -30,12 +25,14 @@ class TileLayer extends Component {
           offset: colIdx % 2 === 0 ? 0 : this.props.tileHeight / 2,
           tileData: tileData // {latitude, longitude, data}
         };
+        console.log("tile");
         acc.push(<TileContainer key={`${rowIdx}-${colIdx}`} {...tileProps} />);
       });
       return acc;
     }, []);
 
   render() {
+    console.log("tiles rendering!");
     const width =
       this.props.tileWidth * 0.75 * this.props.xTiles +
       this.props.tileWidth / 4;

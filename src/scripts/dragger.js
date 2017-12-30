@@ -1,4 +1,4 @@
-function makeMapDraggable(tileWidth, tileHeight, xOffset, yOffset) {
+function makeMapDraggable(tileWidth, tileHeight) {
   const tileMap = document.getElementById("tile-map");
   const startX = tileMap.offsetLeft;
   const startY = tileMap.offsetTop;
@@ -17,12 +17,15 @@ function makeMapDraggable(tileWidth, tileHeight, xOffset, yOffset) {
   }
 
   function mouseUp(e) {
-    const xMoved = e.clientX - xMouseDown + lastXShift;
-    const yMoved = e.clientY - yMouseDown + lastYShift;
-    const xJaunt = (lastXShift = xMoved % (tileWidth * 2)); // because they are hexagons
-    const yJaunt = (lastYShift = yMoved % tileHeight);
-    tileMap.style.left = startX + xJaunt + "px";
-    tileMap.style.top = startY + yJaunt + "px";
+    //Daniel, this was causing tiles to appear with the wrong data/location briefly.
+    //tiles still move imperceptibly!
+    // const xMoved = e.clientX - xMouseDown + lastXShift;
+    // const yMoved = e.clientY - yMouseDown + lastYShift;
+    // const xJaunt = (lastXShift = xMoved % (tileWidth * 2)); // because they are hexagons
+    // const yJaunt = (lastYShift = yMoved % tileHeight);
+
+    // tileMap.style.left = startX + xJaunt + "px";
+    // tileMap.style.top = startY + yJaunt + "px";
     window.removeEventListener("mousemove", move, true);
   }
 

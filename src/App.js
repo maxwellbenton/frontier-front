@@ -13,6 +13,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("tile height", this.props.tileHeight);
     return (
       <div id="tile-map-container">
         <Map />

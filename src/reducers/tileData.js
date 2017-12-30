@@ -16,10 +16,10 @@ export default function tileData(
       return {
         ...state,
         tileData: action.payload.tiles,
-        tileHeight: action.payload.divHeight,
-        tileWidth: action.payload.divWidth,
-        xTiles: action.payload.xTiles,
+        tileHeight: action.payload.tileHeight,
+        tileWidth: action.payload.tileWidth,
         yTiles: action.payload.yTiles,
+        xTiles: action.payload.xTiles,
         yOffset: action.payload.yOffset,
         xOffset: action.payload.xOffset,
         latPerPix: action.payload.latPerPix,
@@ -27,6 +27,7 @@ export default function tileData(
       };
     case "SET_TILES_LOADED":
       return {
+        ...state,
         tilesLoaded: true
       };
     default:
