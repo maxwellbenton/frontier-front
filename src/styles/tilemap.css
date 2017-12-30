@@ -6,6 +6,7 @@
 
 #tile-map-container {
   /* opacity: 0.85; */
+  overflow: hidden;
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -60,4 +61,37 @@
   pointer-events: none;
   opacity: 1;
   pointer-events: none;
+}
+
+.upperTileEdge {
+  position: absolute;
+  top: -100vh;
+  left: -100vw;
+  width: 300vw;
+  height: 110vh;
+  background-color: #000;
+}
+.leftTileEdge {
+  position: absolute;
+  top: -100vh;
+  left: -100vw;
+  width: 110vw;
+  height: 300vh;
+  background-color: #000;
+}
+.lowerTileEdge {
+  position: absolute;
+  top: 140vh;
+  left: -100vw;
+  width: 300vw;
+  height: 100vh;
+  background-color: #000;
+}
+.rightTileEdge {
+  position: absolute;
+  top: -100vh;
+  left: 150vw;
+  width: 100vw;
+  height: 300vh;
+  background-color: #000;
 }

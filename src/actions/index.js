@@ -37,9 +37,10 @@ export function getLocationData({ center, zoom, bounds, marginBounds }) {
 
   //offsetLng & Lat are the hex tile coords closest to where we start the tile layer
   // Math.round(bounds.nw.lng * 1000) / 1000; ==> starts are top left corner of map at closest tile
-  const offsetLng = Math.round(bounds.nw.lng * 1000) / 1000;
+  const offsetLng = Math.round((bounds.nw.lng + lngDiff / 4) * 1000) / 1000;
   let latHexOffset = (offsetLng * 2000) % 2 === 0 ? 0 : 0.00025;
-  const offsetLat = Math.round(bounds.nw.lat * 1000) / 1000 + latHexOffset;
+  const offsetLat =
+    Math.round((bounds.nw.lat + latDiff / 4) * 1000) / 1000 + latHexOffset;
 
   //calculate pixel difference between top left map corner and offset hex tile
   //this offset is used to adjust position of the tile layer
@@ -52,8 +53,8 @@ export function getLocationData({ center, zoom, bounds, marginBounds }) {
 
   //number of tiles needed for map
   // Math.ceil(window.innerWidth / tileWidth) only renders enough to cover most of the screen
-  const xTiles = Math.ceil(window.innerWidth / tileWidth);
-  const yTiles = Math.ceil(window.innerHeight / tileHeight);
+  const xTiles = Math.ceil(window.innerWidth * 1.5 / tileWidth);
+  const yTiles = Math.ceil(window.innerHeight * 1.5 / tileHeight);
 
   return dispatch => {
     let tiles = [];

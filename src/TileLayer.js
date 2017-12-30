@@ -33,22 +33,24 @@ class TileLayer extends Component {
 
   render() {
     console.log("tiles rendering!");
-    const width =
-      this.props.tileWidth * 0.75 * this.props.xTiles +
-      this.props.tileWidth / 4;
-    const height =
-      this.props.tileHeight * this.props.yTiles + this.props.tileHeight / 2;
+    // const width =
+    //   this.props.tileWidth * 0.75 * this.props.xTiles +
+    //   this.props.tileWidth / 4;
+    // const height =
+    //   this.props.tileHeight * this.props.yTiles + this.props.tileHeight / 2;
     return (
       <div
         id="tile-map"
         style={{
-          width: `${width}px`,
-          height: `${height}px`,
           top: this.props.yOffset - this.props.tileHeight / 2,
           left: this.props.xOffset - this.props.tileWidth * 0.75
         }}
       >
         {this.props.tileData ? this.generateTiles() : null}
+        <div className="upperTileEdge" />
+        <div className="lowerTileEdge" />
+        <div className="leftTileEdge" />
+        <div className="rightTileEdge" />
       </div>
     );
   }

@@ -12,18 +12,6 @@
   animation: fade-up-out 1s ease-in forwards;
 }
 
-.grid {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr auto;
-  grid-gap: 10px;
-  background-color: #fff;
-  color: #444;
-}
-
 .hexagon:after {
   top: 100%;
   width: 0;
@@ -31,6 +19,10 @@
 }
 
 @keyframes fade-up-out {
-  0% { opacity: 1 }
-  100% { opacity: 0 }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
