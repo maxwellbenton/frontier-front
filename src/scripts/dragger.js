@@ -1,15 +1,15 @@
 function makeMapDraggable(tileWidth, tileHeight) {
   const tileMap = document.getElementById("tile-map");
-  const startX = tileMap.offsetLeft;
-  const startY = tileMap.offsetTop;
+  // const startX = tileMap.offsetLeft;
+  // const startY = tileMap.offsetTop;
   window.addEventListener("mousedown", mouseDown, false);
   window.addEventListener("mouseup", mouseUp, false);
   let xMouseOffset = null;
   let yMouseOffset = null;
   let xMouseDown = null;
   let yMouseDown = null;
-  let lastXShift = 0;
-  let lastYShift = 0;
+  // let lastXShift = 0;
+  // let lastYShift = 0;
 
   function move(e) {
     tileMap.style.top = e.clientY - yMouseOffset + "px";
