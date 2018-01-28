@@ -6,7 +6,7 @@ import Map from "./Map";
 import { connect } from "react-redux";
 import { getLocation } from "./actions";
 import TileLayer from "./TileLayer";
-
+import IDBAdapter from "./adapters/idb.js";
 class App extends Component {
   componentDidMount() {
     this.props.getLocation();

@@ -1,4 +1,7 @@
-import { RestfulAdapter } from "../adapter";
+// import { RestfulAdapter } from "../adapters";
+// import fire from "../fire";
+// import idb from "idb";
+import IDBAdapter from "../adapters/idb";
 
 export function getLocation() {
   //runs at App.js componentDidMount to get current location.  Map will render once lat/long are set
@@ -6,11 +9,24 @@ export function getLocation() {
     dispatch(gettingLocation());
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
-        dispatch(
-          setLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          })
+        const closestLng = (
+          Math.round(position.coords.longitude * 1000) / 1000
+        ).toFixed(4);
+        let cLatHexOffset = (closestLng * 2000) % 2 === 0 ? 0 : 0.00025;
+        const closestLat = (
+          Math.round(position.coords.latitude * 1000) / 1000 +
+          cLatHexOffset
+        ).toFixed(5);
+
+        IDBAdapter.create("tiles", {
+          coords: `${closestLat},${closestLng}`
+        }).then(() =>
+          dispatch(
+            setLocation({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            })
+          )
         );
       });
     } else {
@@ -19,9 +35,13 @@ export function getLocation() {
   };
 }
 
-export function setReadyState() {
+export function setLocation(location) {
   return {
-    type: "SET_TILES_LOADED"
+    type: "SET_LOCATION",
+    payload: {
+      latitude: location.lat,
+      longitude: location.lng
+    }
   };
 }
 
@@ -56,27 +76,10 @@ export function getLocationData({ center, zoom, bounds, marginBounds }) {
   const xTiles = Math.ceil(window.innerWidth * 1.5 / tileWidth);
   const yTiles = Math.ceil(window.innerHeight * 1.5 / tileHeight);
 
-  //being used for json-server
-
   return dispatch => {
     let tiles = [];
 
-    const closestLng = (Math.round(center.lng * 1000) / 1000).toFixed(4);
-    let cLatHexOffset = (closestLng * 2000) % 2 === 0 ? 0 : 0.00025;
-    const closestLat = (
-      Math.round(center.lat * 1000) / 1000 +
-      cLatHexOffset
-    ).toFixed(5);
-
-    let postCoords = RestfulAdapter.createFetch("tiles", {
-      coords: `${closestLat},${closestLng}`
-    });
-
-    let serverData = postCoords.then(() =>
-      RestfulAdapter.indexFetch("tiles").then(tiles => tiles)
-    );
-
-    serverData.then(tileData => {
+    IDBAdapter.all("tiles").then(tileData => {
       console.log(tileData);
       for (let colIdx = 0; colIdx < xTiles; colIdx++) {
         tiles[colIdx] = [];
@@ -107,6 +110,7 @@ export function getLocationData({ center, zoom, bounds, marginBounds }) {
           });
         }
       }
+
       dispatch(
         setLocalData({
           tiles,
@@ -124,19 +128,15 @@ export function getLocationData({ center, zoom, bounds, marginBounds }) {
   };
 }
 
-export function gettingLocation() {
+export function setReadyState() {
   return {
-    type: "GETTING_LOCATION"
+    type: "SET_TILES_LOADED"
   };
 }
 
-export function setLocation(location) {
+export function gettingLocation() {
   return {
-    type: "SET_LOCATION",
-    payload: {
-      latitude: location.lat,
-      longitude: location.lng
-    }
+    type: "GETTING_LOCATION"
   };
 }
 
